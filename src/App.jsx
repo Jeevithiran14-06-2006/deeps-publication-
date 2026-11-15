@@ -8,6 +8,8 @@ import Login from './pages/Login';
 import Journals from './pages/Journals';
 import JournalDetail from './pages/JournalDetail';
 import TrackManuscript from './pages/TrackManuscript';
+import PaperReaderPage from './pages/PaperReaderPage';
+import KnowledgeGalaxy from './components/KnowledgeGalaxy';
 import { CartProvider, useCart } from './context/CartContext';
 import CartDrawer from './components/CartDrawer';
 import { 
@@ -181,6 +183,27 @@ function Home() {
           </div>
         </div>
       </div>
+
+      {/* 3D Interactive Knowledge Galaxy Section */}
+      <section className="section" style={{ padding: '2rem 0 3rem' }}>
+        <div className="container">
+          <div className="section-header-split" style={{ marginBottom: '1.5rem' }}>
+            <div>
+              <span className="badge badge-yellow">Interactive 3D Citation Cosmos</span>
+              <h2>Explore the Knowledge Galaxy</h2>
+              <p style={{ color: 'var(--text-muted)', marginTop: '0.5rem', maxWidth: '640px' }}>
+                Traverse connected scientific breakthroughs across AI, Biotechnology, Medicine, and Materials Science in our live 3D orbital constellation.
+              </p>
+            </div>
+            <div>
+              <Link to="/publications" className="btn btn-outline">
+                View Full Catalog <ArrowRight size={14} />
+              </Link>
+            </div>
+          </div>
+          <KnowledgeGalaxy onSelectPaper={(p) => window.location.href = `/read/${p.id || 1}`} />
+        </div>
+      </section>
 
       {/* Categories */}
       <div className="container">
@@ -586,6 +609,7 @@ export default function App() {
           <Route path="/journals" element={<Journals />} />
           <Route path="/journals/:journalId" element={<JournalDetail />} />
           <Route path="/track" element={<TrackManuscript />} />
+          <Route path="/read/:paperId" element={<PaperReaderPage />} />
           
           {/* Protected Routes */}
           <Route path="/submit" element={<ProtectedRoute><SubmitManuscript /></ProtectedRoute>} />
